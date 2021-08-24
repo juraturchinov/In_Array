@@ -1,0 +1,32 @@
+function in_array(needle, haystack, strict)
+{
+    var found = false,
+        key,
+        strict = !!strict;
+
+    for (key in haystack)
+    {
+        if (
+            (strict && haystack[key] === needle) ||
+            (!strict && haystack[key] == needle)
+        )
+        {
+            found = true;
+            break;
+        }
+    }
+
+    return found;
+}
+$.expr[":"].Contains = $.expr.createPseudo(function (arg)
+{
+    return function (elem)
+    {
+        return (
+            $(elem)
+                .text()
+                .toUpperCase()
+                .indexOf(arg.toUpperCase()) >= 0
+        );
+    };
+});
